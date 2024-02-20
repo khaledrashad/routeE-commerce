@@ -7,6 +7,9 @@ import Products from './Components/Products/Products'
 import Register from './Components/Register/Register'
 import DetailedProducts from './Components/DetailedProducts/DetailedProducts'
 import Home from './Components/Home/Home'
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
+import Categories from './Components/Categories/Categories'
+import Brands from './Components/Brands/Brands'
 
 export default function App() {
 
@@ -14,12 +17,13 @@ export default function App() {
   let routers = createBrowserRouter([
     {path:"" ,element: <Layout/>,children: [
       {index: true, element: <Login/>},
-      {path: "cart", element: <Cart/>},
-      {path: "products", element: <Products/>},
+      {path: "cart", element: <ProtectedRoute><Cart/></ProtectedRoute>},
+      {path: "products", element: <ProtectedRoute><Products/></ProtectedRoute>},
       {path: "register", element: <Register/>},
-      {path: "detailedProduct/:id", element: <DetailedProducts/>},
-      {path: "home", element: <Home/>},
-      {path: "login", element: <Login/>}
+      {path: "detailedProduct/:id", element: <ProtectedRoute><DetailedProducts/></ProtectedRoute>},
+      {path: "home", element: <ProtectedRoute><Home/></ProtectedRoute>},
+      {path: "categories", element: <ProtectedRoute><Categories/></ProtectedRoute>},
+      {path: "brands", element: <ProtectedRoute><Brands/></ProtectedRoute>}
     ]}
   ])
   return <>
