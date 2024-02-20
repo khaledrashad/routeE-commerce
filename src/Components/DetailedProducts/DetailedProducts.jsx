@@ -3,6 +3,7 @@ import styles from './DetailedProducts.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { DNA } from 'react-loader-spinner'
+import Slider from 'react-slick'
 export default function DetailedProducts(props) {
 
 
@@ -10,7 +11,15 @@ export default function DetailedProducts(props) {
   const [loading, setLoading] = useState(true)
   let { id } = useParams()
 
-
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000
+  }
 
   useEffect(() => {
     axios.get(`https://route-ecommerce.onrender.com/api/v1/products/${id}`).then(product => {
@@ -32,9 +41,16 @@ export default function DetailedProducts(props) {
       wrapperStyle={{}}
       wrapperClass="dna-wrapper"
     /></div> :
-      <div className="row align-items-center">
+      <div className="row align-items-center py-3">
         <div className="col-md-4">
-          <img src={ProductDetails.imageCover} alt="" className='w-100' />
+          <Slider {...settings}>
+            <div>
+              <img src={ProductDetails.imageCover} alt="" className='w-100' />
+            </div>
+            {ProductDetails.images.map(img => <div>
+              <img src={img} alt="" className='w-100' />
+            </div>)}
+          </Slider>
         </div>
         <div className="col-md-8">
           <p className='fw-bold'>{ProductDetails.slug}</p>
@@ -47,7 +63,7 @@ export default function DetailedProducts(props) {
               <span className='text-black'>{ProductDetails.ratingsAverage}</span>
             </div>
           </div>
-            <button className='btn bg-main w-100 text-white'>Add to cart</button> 
+          <button className='btn bg-main w-100 text-white'>Add to cart</button>
 
         </div>
       </div>}

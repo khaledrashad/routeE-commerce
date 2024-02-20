@@ -30,7 +30,7 @@ export default function Home() {
     <div className='allProducts'>
       <div className="row g-3">
         {products.map(product =>
-          <div className="col-md-2">
+          <div className="col-md-3">
             <Link to={`/detailedProduct/${product.id}`} className='text-decoration-none'>
               <div className="product cursor-pointer p-2" key={product.id} id={product.id}>
                 <img src={product.imageCover} alt="" className='w-100' />
