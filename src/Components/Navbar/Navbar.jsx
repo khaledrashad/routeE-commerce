@@ -3,11 +3,12 @@ import styles from './Navbar.css'
 import { Link } from 'react-router-dom'
 import logo from "../../Assets/images/freshcart-logo.svg"
 export default function Navbar() {
+
   const [token, setToken] = useState(false)
 
   function logOut() {
-    setToken(false)
     localStorage.removeItem("token")
+    setToken(false)
   }
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <Link className="nav-link" aria-current="page" to="brands">Brands</Link>
               </li>
-            </div> : null }
+            </div> : null}
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className='d-flex align-items-center'>

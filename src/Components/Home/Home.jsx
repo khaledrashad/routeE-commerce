@@ -32,7 +32,7 @@ export default function Home() {
         {products.map(product =>
           <div className="col-md-2">
             <Link to={`/detailedProduct/${product.id}`} className='text-decoration-none'>
-              <div className="product cursor-pointer" key={product.id} id={product.id}>
+              <div className="product cursor-pointer p-2" key={product.id} id={product.id}>
                 <img src={product.imageCover} alt="" className='w-100' />
                 <h3 className='font-sm text-main m-0'>{product.category.name}</h3>
                 <h3 className='h5 text-black'>{product.slug.split("-").splice(0, 3).join(" ")}</h3>

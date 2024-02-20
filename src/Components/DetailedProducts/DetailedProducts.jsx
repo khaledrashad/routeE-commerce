@@ -32,11 +32,24 @@ export default function DetailedProducts(props) {
       wrapperStyle={{}}
       wrapperClass="dna-wrapper"
     /></div> :
-    <div className="row">
-      <div className="col-md-4">
-        <img src={ProductDetails.imageCover} alt="" className='w-100'/>
-      </div>
-      <div className="col-md-8"></div>
-    </div>}
+      <div className="row align-items-center">
+        <div className="col-md-4">
+          <img src={ProductDetails.imageCover} alt="" className='w-100' />
+        </div>
+        <div className="col-md-8">
+          <p className='fw-bold'>{ProductDetails.slug}</p>
+          <p className='font-sm'>{ProductDetails.description}</p>
+          <h4 className='font-sm fw-bold'>{ProductDetails.category.name}</h4>
+          <div className='d-flex justify-content-between my-2'>
+            <h4 className='font-sm fw-bold'>{ProductDetails.price} EGP</h4>
+            <div>
+              <i class="fa-solid fa-star px-1 rating-color"></i>
+              <span className='text-black'>{ProductDetails.ratingsAverage}</span>
+            </div>
+          </div>
+            <button className='btn bg-main w-100 text-white'>Add to cart</button> 
+
+        </div>
+      </div>}
   </>
 }
