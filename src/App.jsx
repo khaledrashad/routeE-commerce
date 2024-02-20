@@ -10,6 +10,7 @@ import Home from './Components/Home/Home'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import Categories from './Components/Categories/Categories'
 import Brands from './Components/Brands/Brands'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 export default function App() {
 
@@ -27,6 +28,7 @@ export default function App() {
     ]}
   ])
   return <>
+
     <RouterProvider router={routers}></RouterProvider>
   </>
 }

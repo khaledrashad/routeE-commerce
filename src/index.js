@@ -8,10 +8,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import CartContxtProvider from './Context/CartContext.js';
+
+
+let queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <CartContxtProvider>
+        <QueryClientProvider client={queryClient}>
+            <App />
+            <ReactQueryDevtools position='bottom-right' />
+        </QueryClientProvider>
+    </CartContxtProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
