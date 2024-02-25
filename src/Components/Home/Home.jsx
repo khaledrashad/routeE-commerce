@@ -9,7 +9,7 @@ import toast from 'react-hot-toast'
 
 export default function Home() {
 
-  let { addToCart } = useContext(CartContext)
+  let { addToCart , setCart} = useContext(CartContext)
 
   async function PostDataToCart(id) {
     let { data } = await addToCart(id)

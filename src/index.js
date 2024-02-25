@@ -6,9 +6,9 @@ import "bootstrap/dist/js/bootstrap.min.js"
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import App from './App';
+import App from './App.jsx';
 import 'react-toastify/dist/ReactToastify.css';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './reportWebVitals.js';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import CartContxtProvider from './Context/CartContext.js';
