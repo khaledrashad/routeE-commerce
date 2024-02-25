@@ -60,3 +60,7 @@ a , a:hover{
     border: solid 1px var(--main-color);
     border-radius: 5px;
 }
+
+.h-30 {
+    height: 300px;
+}
