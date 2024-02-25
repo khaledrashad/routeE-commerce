@@ -5,15 +5,19 @@ import { DNA } from 'react-loader-spinner'
 import { Link, useNavigate } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { CartContext } from '../../Context/CartContext.js'
+import toast from 'react-hot-toast'
 
 export default function Home() {
-
 
   let { addToCart } = useContext(CartContext)
 
   async function PostDataToCart(id) {
     let { data } = await addToCart(id)
-    console.log((data));
+    if (data.status == "success") {
+      toast.success(data.message , {icon: '👏', })
+    } else {
+      toast.error("Error in adding product")
+    }
   }
 
   async function getHomeData() {
@@ -33,8 +37,8 @@ export default function Home() {
     /></div> : <div className='allProducts'>
       <div className="row g-3">
         {data?.data.data.map(product =>
-          <div className="col-md-3">
-            <div className="product cursor-pointer p-2" key={product.id} id={product.id}>
+          <div className="col-md-3" key={product.id}>
+            <div className="product cursor-pointer p-2" id={product.id}>
               <Link to={`/detailedProduct/${product.id}`} className='text-decoration-none'>
                 <img src={product.imageCover} alt="" className='w-100' />
                 <h3 className='font-sm text-main m-0'>{product.category.name}</h3>
@@ -47,7 +51,7 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
-              <button onClick={() => { PostDataToCart(product.id) }} className='btn bg-main w-100'>Add to cart</button>
+              <button onClick={() => { PostDataToCart(product.id)}} className='btn bg-main w-100'>Add to cart</button>
             </div>
           </div>)}
       </div>

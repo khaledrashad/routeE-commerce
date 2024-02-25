@@ -18,6 +18,7 @@ export default function Login() {
       })
       .catch((err) => {
         setApiError(err.response.data.message)
+        setLoading(false)
       })
   }
 

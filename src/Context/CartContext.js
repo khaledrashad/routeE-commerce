@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 
 export let CartContext = createContext()
 
-export default function CartContxtProvider(props) {
+export default function CartContextProvider(props) {
 
     const [Cart, setCart] = useState([])
     let userToken = localStorage.getItem("token")

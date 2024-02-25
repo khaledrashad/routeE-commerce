@@ -1,15 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './DetailedProducts.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { DNA } from 'react-loader-spinner'
 import Slider from 'react-slick'
+import { CartContext } from '../../Context/CartContext'
+import toast from 'react-hot-toast'
 export default function DetailedProducts(props) {
 
 
   const [ProductDetails, setProductDetails] = useState(null)
   const [loading, setLoading] = useState(true)
   let { id } = useParams()
+
+  let{addToCart} = useContext(CartContext)
+
+  async function postItemToCart(id){
+    let {data} = await addToCart(id)
+    if (data.status == "success") {
+      toast.success(data.message)
+    }
+  }
 
   var settings = {
     dots: true,
@@ -63,7 +74,7 @@ export default function DetailedProducts(props) {
               <span className='text-black'>{ProductDetails.ratingsAverage}</span>
             </div>
           </div>
-          <button className='btn bg-main w-100 text-white'>Add to cart</button>
+          <button onClick={()=>{postItemToCart(id)}} className='btn bg-main w-100 text-white'>Add to cart</button>
 
         </div>
       </div>}
