@@ -56,7 +56,7 @@ a , a:hover{
 {
     background-color: var(--light-color) !important;
 }
-.cartBtn {
+.cartBtn, .mainBorder {
     border: solid 1px var(--main-color);
     border-radius: 5px;
 }

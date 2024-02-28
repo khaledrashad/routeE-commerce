@@ -14,7 +14,7 @@ export default function Login() {
     axios.post("https://route-ecommerce.onrender.com/api/v1/auth/signin", value).
       then((user) => {
         localStorage.setItem("token", user.data.token)
-        navigate("/home")
+        navigate("/")
       })
       .catch((err) => {
         setApiError(err.response.data.message)

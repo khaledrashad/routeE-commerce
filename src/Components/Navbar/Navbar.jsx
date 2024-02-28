@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from "../../Assets/images/freshcart-logo.svg"
 export default function Navbar() {
+
+  let navigate = useNavigate
 
   const [token, setToken] = useState(false)
 
   function logOut() {
     localStorage.removeItem("token")
     setToken(false)
+    navigate("/")
   }
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export default function Navbar() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {token ? <div className='d-flex'>
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="home">Home</Link>
+                <Link className="nav-link" aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" aria-current="page" to="cart">Cart</Link>

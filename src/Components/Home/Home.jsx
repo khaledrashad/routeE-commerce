@@ -28,7 +28,7 @@ export default function Home() {
 
   const setting1 = {
     className: "center",
-    centerMode: true,
+    centerMode: false,
     infinite: true,
     centerPadding: "60px",
     slidesToShow: 5,
@@ -63,7 +63,7 @@ export default function Home() {
 
   return <>
 
-    <div className="row py-5 align-items-lg-stretch">
+    <div className="row py-1 align-items-lg-stretch">
       <div className="col-md-8 p-0">
         <Slider {...settings}>
           <div>
@@ -83,8 +83,6 @@ export default function Home() {
       </div>
     </div>
 
-    <h2 className='fw-bold'>Shop By Category:</h2>
-
     {isLoading ? <div className='vh-100 d-flex justify-content-center align-items-center'><DNA
       visible={true}
       height="200"
@@ -92,11 +90,11 @@ export default function Home() {
       ariaLabel="dna-loading"
       wrapperStyle={{}}
       wrapperClass="dna-wrapper"
-    /></div> : <div className="slider-container py-5">
+    /></div> : <div className="slider-container py-2">
       <Slider {...setting1}>
-        {catData?.data.data.data.map(cat => <div key={cat._id}>
+        {catData?.data.data.data.map(cat => <Link key={cat._id}>
           <img src={cat.image} alt="" className='w-100 h-30' />
-        </div>)}
+        </Link>)}
       </Slider>
     </div>}
 

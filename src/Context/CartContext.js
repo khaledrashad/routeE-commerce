@@ -5,7 +5,7 @@ export let CartContext = createContext()
 
 export default function CartContextProvider(props) {
 
-    const [Cart, setCart] = useState(null)
+    const [Cart, setCart] = useState([])
     let headers = { token: localStorage.getItem("token") }
 
 
