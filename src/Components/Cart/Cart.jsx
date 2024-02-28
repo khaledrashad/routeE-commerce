@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Cart.css'
 import { useQuery } from 'react-query'
 import axios from 'axios'
@@ -14,12 +14,11 @@ export default function Cart() {
   let { deleteCartItem, Cart, setCart, deleteAllItems, updateItemCount } = useContext(CartContext)
 
   function getCartData() {
-     axios.get(`https://route-ecommerce.onrender.com/api/v1/cart`, {
+    axios.get(`https://route-ecommerce.onrender.com/api/v1/cart`, {
       headers: {
         token: localStorage.getItem("token")
       }
     }).then(cartProducts => {
-      console.log(cartProducts);
       setCart(cartProducts)
       setloading(false)
     }).catch(err => {
@@ -35,15 +34,23 @@ export default function Cart() {
 
   async function removeCartItem(id) {
     let data = await deleteCartItem(id)
-    setCart(data)
+    if (data.data.numOfCartItems == 0) {
+      removeAllCartItem()
+    } else {
+      setCart(data)
+    }
   }
-  async function updateCartItemCount(id,count) {
-    let data = await updateItemCount(id,count)
-    setCart(data)
+  async function updateCartItemCount(id, count) {
+    let data = await updateItemCount(id, count)
+    if (data.data.data.products[0].count == 0) {
+      removeCartItem(id)
+    } else {
+      setCart(data)
+    }
   }
   async function removeAllCartItem() {
     let data = await deleteAllItems()
-    if(data.data.message == "success"){
+    if (data.data.message == "success") {
       setError(true)
     }
   }
@@ -71,7 +78,7 @@ export default function Cart() {
             <Link className='text-decoration-none text-black' onClick={() => { removeCartItem(product.product._id) }}><i class="fa-solid fa-trash-can text-main"></i> Remove</Link>
           </div>
           <div className="col-2">
-            <span><button onClick={()=>{updateCartItemCount(product.product._id,product.count+1)}} className="cartBtn">+</button> {product.count} <button onClick={()=>{updateCartItemCount(product.product._id,product.count-1)}} className='cartBtn'>-</button></span>
+            <span><button onClick={() => { updateCartItemCount(product.product._id, product.count + 1) }} className="cartBtn">+</button> {product.count} <button onClick={() => { updateCartItemCount(product.product._id, product.count - 1) }} className='cartBtn'>-</button></span>
           </div>
         </div>)}
         <button onClick={removeAllCartItem} className='btn bg-main ms-2 mb-2 fw-bold text-white'>Clear Your Cart</button>
