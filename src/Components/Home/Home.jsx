@@ -79,7 +79,7 @@ export default function Home() {
       </div>
       <div className="col-md-4 p-0">
         <img src={sidePic1} alt="" className='w-100 h-50' />
-        <img src={sidePic2} alt="" className='w-100 h-50 pb-1' />
+        <img src={sidePic2} alt="" className='w-100 h-50 pb-3' />
       </div>
     </div>
 

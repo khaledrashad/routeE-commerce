@@ -5,13 +5,14 @@ import axios from 'axios'
 import { DNA } from 'react-loader-spinner'
 import { CartContext } from '../../Context/CartContext'
 import { Link } from 'react-router-dom'
+
 export default function Cart() {
 
   const [loading, setloading] = useState(true)
   const [Error, setError] = useState("")
 
 
-  let { deleteCartItem, Cart, setCart, deleteAllItems, updateItemCount } = useContext(CartContext)
+  let { deleteCartItem, Cart, setCart, deleteAllItems, updateItemCount, setCartId } = useContext(CartContext)
 
   function getCartData() {
     axios.get(`https://route-ecommerce.onrender.com/api/v1/cart`, {
@@ -20,6 +21,7 @@ export default function Cart() {
       }
     }).then(cartProducts => {
       setCart(cartProducts)
+      setCartId(cartProducts.data.data._id);
       setloading(false)
     }).catch(err => {
       setError(err.response.data.statusMsg);
@@ -42,10 +44,12 @@ export default function Cart() {
   }
   async function updateCartItemCount(id, count) {
     let data = await updateItemCount(id, count)
-    if (data.data.data.products[0].count == 0) {
-      removeCartItem(id)
-    } else {
-      setCart(data)
+    for (let i = 0; i < data.data.data.products.length; i++) {
+      if (data.data.data.products[i].count == 0) {
+        removeCartItem(id)
+      } else {
+        setCart(data)
+      }
     }
   }
   async function removeAllCartItem() {
@@ -81,7 +85,10 @@ export default function Cart() {
             <span><button onClick={() => { updateCartItemCount(product.product._id, product.count + 1) }} className="cartBtn">+</button> {product.count} <button onClick={() => { updateCartItemCount(product.product._id, product.count - 1) }} className='cartBtn'>-</button></span>
           </div>
         </div>)}
-        <button onClick={removeAllCartItem} className='btn bg-main ms-2 mb-2 fw-bold text-white'>Clear Your Cart</button>
+        <div className="d-flex justify-content-between px-2">
+          <button onClick={removeAllCartItem} className='btn bg-main ms-2 mb-2 fw-bold text-white'>Clear Your Cart</button>
+          <Link className='btn bg-main ms-2 mb-2 fw-bold text-white' to={"/paymentAddress"}>Pay Your Cart Online</Link>
+        </div>
       </div>
     </div>}
 

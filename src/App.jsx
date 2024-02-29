@@ -13,6 +13,9 @@ import Brands from './Components/Brands/Brands'
 import { Toaster } from 'react-hot-toast'
 import { Provider } from 'react-redux'
 import { Store } from './Redux/Store'
+import PaymentAddress from './Components/PaymentAddress/PaymentAddress'
+import AllOrders from './Components/AllOrders/AllOrders'
+import Error from './Components/Error/Error'
 
 
 export default function App() {
@@ -23,12 +26,15 @@ export default function App() {
       path: "", element: <Layout />, children: [
         { path: "login", element: <Login /> },
         { path: "cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
+        { path: "paymentAddress", element: <PaymentAddress /> },
         { path: "products", element: <ProtectedRoute><Products /></ProtectedRoute> },
+        { path: "allOrders", element: <ProtectedRoute><AllOrders /></ProtectedRoute> },
         { path: "register", element: <Register /> },
         { path: "detailedProduct/:id", element: <ProtectedRoute><DetailedProducts /></ProtectedRoute> },
         { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
         { path: "categories", element: <ProtectedRoute><Categories /></ProtectedRoute> },
-        { path: "brands", element: <ProtectedRoute><Brands /></ProtectedRoute> }
+        { path: "brands", element: <ProtectedRoute><Brands /></ProtectedRoute> },
+        { path: "*", element: <ProtectedRoute><Error /></ProtectedRoute> },
       ]
     }
   ])

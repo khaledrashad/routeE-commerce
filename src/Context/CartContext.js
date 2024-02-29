@@ -6,6 +6,7 @@ export let CartContext = createContext()
 export default function CartContextProvider(props) {
 
     const [Cart, setCart] = useState([])
+    const [CartId, setCartId] = useState("")
     let headers = { token: localStorage.getItem("token") }
 
 
@@ -44,7 +45,7 @@ export default function CartContextProvider(props) {
             .catch(err => err)
     }
 
-    return <CartContext.Provider value={{ addToCart, deleteCartItem, Cart, setCart , deleteAllItems, updateItemCount}}>
+    return <CartContext.Provider value={{ addToCart, deleteCartItem, Cart, setCart , deleteAllItems, updateItemCount ,setCartId , CartId}}>
         {props.children}
     </CartContext.Provider>
 
