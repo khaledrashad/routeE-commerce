@@ -30,9 +30,9 @@ export default function Brands() {
       wrapperStyle={{}}
       wrapperClass="dna-wrapper"
     /></div> : <div className="row g-3">
-      {data.brands.map(brand => <Link className="col-md-3" key={brand._id} id={brand._id} to={`/specificBrand/${brand._id}`}>
+      {data.brands.map(brand => <div className="col-md-3 cursor-pointer" key={brand._id} id={brand._id} to={`/specificBrand/${brand._id}`}>
         <img src={brand.image} alt="" className='w-100 h-30' />
-      </Link>)}
+      </div>)}
     </div>}
   </>
 }

@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import styles from './Cart.css'
-import { useQuery } from 'react-query'
 import axios from 'axios'
 import { DNA } from 'react-loader-spinner'
 import { CartContext } from '../../Context/CartContext'

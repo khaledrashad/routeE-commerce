@@ -3,7 +3,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './Components/Layout/Layout'
 import Login from './Components/Login/Login'
 import Cart from './Components/Cart/Cart'
-import Products from './Components/Products/Products'
 import Register from './Components/Register/Register'
 import DetailedProducts from './Components/DetailedProducts/DetailedProducts'
 import Home from './Components/Home/Home'
@@ -16,6 +15,7 @@ import { Store } from './Redux/Store'
 import PaymentAddress from './Components/PaymentAddress/PaymentAddress'
 import AllOrders from './Components/AllOrders/AllOrders'
 import Error from './Components/Error/Error'
+import WishList from './Components/WishList/WishList'
 
 
 export default function App() {
@@ -27,9 +27,9 @@ export default function App() {
         { path: "login", element: <Login /> },
         { path: "cart", element: <ProtectedRoute><Cart /></ProtectedRoute> },
         { path: "paymentAddress", element: <PaymentAddress /> },
-        { path: "products", element: <ProtectedRoute><Products /></ProtectedRoute> },
         { path: "allOrders", element: <ProtectedRoute><AllOrders /></ProtectedRoute> },
-        { path: "register", element: <Register /> },
+        { path: "wishList", element: <ProtectedRoute><WishList /></ProtectedRoute> },
+        { path: "register", element: <Register />},
         { path: "detailedProduct/:id", element: <ProtectedRoute><DetailedProducts /></ProtectedRoute> },
         { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
         { path: "categories", element: <ProtectedRoute><Categories /></ProtectedRoute> },

@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './Login.css'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { TokenContext } from '../../Context/TokenContext'
 export default function Login() {
+
+  let {setToken} = useContext(TokenContext)
 
   const [apiError, setApiError] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -15,6 +18,7 @@ export default function Login() {
       then((user) => {
         localStorage.setItem("token", user.data.token)
         navigate("/")
+        setToken(true)
       })
       .catch((err) => {
         setApiError(err.response.data.message)
