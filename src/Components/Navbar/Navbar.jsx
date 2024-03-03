@@ -15,6 +15,12 @@ export default function Navbar() {
     navigate("/")
   }
 
+  useEffect(()=>{
+    if(localStorage.getItem("token") != null){
+      setToken(true)
+    }
+  },[])
+
   return <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -36,6 +42,9 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link fw-bold" aria-current="page" to="brands">Brands</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link fw-bold" aria-current="page" to="allOrders">Orders</Link>
               </li>
             </div> : null}
           </ul>

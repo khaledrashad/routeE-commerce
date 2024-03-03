@@ -14,7 +14,6 @@ export default function Brands() {
 
   let data = useSelector(({brands}) => brands)
   console.log(data);
-
  useEffect(()=>{
   dispatch(getBrands())
  },[])

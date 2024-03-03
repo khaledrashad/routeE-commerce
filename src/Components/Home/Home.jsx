@@ -12,8 +12,21 @@ import slider2 from "../../Assets/images/slider-image-2.jpeg"
 import slider3 from "../../Assets/images/slider-image-3.jpeg"
 import sidePic1 from "../../Assets/images/grocery-banner.png"
 import sidePic2 from "../../Assets/images/grocery-banner-2.jpeg"
+import { useDispatch, useSelector } from 'react-redux'
+import { addWishlistItem } from '../../Redux/wishlistSlice.js'
 
 export default function Home() {
+
+  let dispatch = useDispatch()
+  function PostDataToWishlist(id) {
+    dispatch(addWishlistItem(id)).then(data => {
+      if(data.payload.status == "success"){
+        toast.success(data.payload.message, { icon: '👏', })
+      } else {
+        toast.error("Error in adding product")
+      }
+    })
+  }
 
   var settings = {
     dots: false,
@@ -39,7 +52,7 @@ export default function Home() {
     slidesPerRow: 1
   };
 
-  let { addToCart, setCart } = useContext(CartContext)
+  let { addToCart} = useContext(CartContext)
 
   async function PostDataToCart(id) {
     let { data } = await addToCart(id)
@@ -122,11 +135,14 @@ export default function Home() {
                   </div>
                 </div>
               </Link>
+              <div className='text-end'>
+                <Link><i className="fa-solid fa-heart text-danger fs-2 wishlistIcon"></i></Link>
+                <Link onClick={() => { PostDataToWishlist(product.id) }}><i className="fa-regular fa-heart text-danger fs-2 wishlistIcon"></i></Link>
+              </div>
               <button onClick={() => { PostDataToCart(product.id) }} className='btn bg-main w-100'>Add to cart</button>
             </div>
           </div>)}
       </div>
     </div>}
-
   </>
 }

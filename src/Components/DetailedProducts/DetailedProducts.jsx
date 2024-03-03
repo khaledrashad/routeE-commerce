@@ -1,22 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './DetailedProducts.css'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { DNA } from 'react-loader-spinner'
 import Slider from 'react-slick'
 import { CartContext } from '../../Context/CartContext'
 import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
+import { addWishlistItem } from '../../Redux/wishlistSlice'
 export default function DetailedProducts(props) {
+
+  let dispatch = useDispatch()
+  function PostDataToWishlist(id) {
+    dispatch(addWishlistItem(id)).then(data => {
+      if (data.payload.status == "success") {
+        toast.success(data.payload.message, { icon: '👏', })
+      } else {
+        toast.error("Error in adding product")
+      }
+    })
+  }
 
 
   const [ProductDetails, setProductDetails] = useState(null)
   const [loading, setLoading] = useState(true)
   let { id } = useParams()
 
-  let{addToCart} = useContext(CartContext)
+  let { addToCart } = useContext(CartContext)
 
-  async function postItemToCart(id){
-    let {data} = await addToCart(id)
+  async function postItemToCart(id) {
+    let { data } = await addToCart(id)
     if (data.status == "success") {
       toast.success(data.message)
     }
@@ -74,7 +87,11 @@ export default function DetailedProducts(props) {
               <span className='text-black'>{ProductDetails.ratingsAverage}</span>
             </div>
           </div>
-          <button onClick={()=>{postItemToCart(id)}} className='btn bg-main w-100 text-white'>Add to cart</button>
+          <div className='text-end'>
+            <Link><i className="fa-solid fa-heart text-danger fs-2 wishlistIcon"></i></Link>
+            <Link onClick={() => { PostDataToWishlist(id) }}><i className="fa-regular fa-heart text-danger fs-2 wishlistIcon"></i></Link>
+          </div>
+          <button onClick={() => { postItemToCart(id) }} className='btn bg-main w-100 text-white'>Add to cart</button>
 
         </div>
       </div>}
