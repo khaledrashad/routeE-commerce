@@ -1,79 +1,47 @@
-import React, { useContext, useEffect, useState } from 'react'
 import styles from './Home.css'
-import axios from 'axios'
+import React, { useContext} from 'react'
 import { DNA } from 'react-loader-spinner'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { CartContext } from '../../Context/CartContext.js'
-import toast from 'react-hot-toast'
 import Slider from 'react-slick'
 import slider1 from "../../Assets/images/slider-image-1.jpeg"
 import slider2 from "../../Assets/images/slider-image-2.jpeg"
 import slider3 from "../../Assets/images/slider-image-3.jpeg"
 import sidePic1 from "../../Assets/images/grocery-banner.png"
 import sidePic2 from "../../Assets/images/grocery-banner-2.jpeg"
-import { useDispatch, useSelector } from 'react-redux'
-import { addWishlistItem } from '../../Redux/wishlistSlice.js'
+import axios from 'axios'
+import Products from '../Products/Products'
 
 export default function Home() {
-
-  let dispatch = useDispatch()
-  function PostDataToWishlist(id) {
-    dispatch(addWishlistItem(id)).then(data => {
-      if(data.payload.status == "success"){
-        toast.success(data.payload.message, { icon: '👏', })
-      } else {
-        toast.error("Error in adding product")
-      }
-    })
-  }
-
-  var settings = {
-    dots: false,
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: false
-  }
-
-  const setting1 = {
-    className: "center",
-    centerMode: false,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 5,
-    speed: 500,
-    rows: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    slidesPerRow: 1
-  };
-
-  let { addToCart} = useContext(CartContext)
-
-  async function PostDataToCart(id) {
-    let { data } = await addToCart(id)
-    if (data.status == "success") {
-      toast.success(data.message, { icon: '👏', })
-    } else {
-      toast.error("Error in adding product")
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 1000,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: false
     }
-  }
 
-  async function getHomeData() {
-    return await axios.get("https://route-ecommerce.onrender.com/api/v1/products")
+    const setting1 = {
+      className: "center",
+      centerMode: false,
+      infinite: true,
+      centerPadding: "60px",
+      slidesToShow: 5,
+      speed: 500,
+      rows: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      slidesPerRow: 1
+    };
 
-  }
-  let { data, isLoading, isFetched, isError } = useQuery("homeData", getHomeData)
-  async function getCatData() {
-    return await axios.get("https://route-ecommerce.onrender.com/api/v1/categories")
-
-  }
-  let catData = useQuery("catData", getCatData)
-
+    let catData = useQuery("catData", getCatData)
+    async function getCatData() {
+      return await axios.get("https://route-ecommerce.onrender.com/api/v1/categories")
+  
+    }
   return <>
 
     <div className="row py-1 align-items-lg-stretch">
@@ -96,7 +64,7 @@ export default function Home() {
       </div>
     </div>
 
-    {isLoading ? <div className='vh-100 d-flex justify-content-center align-items-center'><DNA
+    {catData.isLoading ? <div className='vh-100 d-flex justify-content-center align-items-center'><DNA
       visible={true}
       height="200"
       width="200"
@@ -110,39 +78,6 @@ export default function Home() {
         </Link>)}
       </Slider>
     </div>}
-
-    {isLoading ? <div className='vh-100 d-flex justify-content-center align-items-center'><DNA
-      visible={true}
-      height="200"
-      width="200"
-      ariaLabel="dna-loading"
-      wrapperStyle={{}}
-      wrapperClass="dna-wrapper"
-    /></div> : <div className='allProducts'>
-      <div className="row g-3">
-        {data?.data.data.map(product =>
-          <div className="col-md-3" key={product.id}>
-            <div className="product cursor-pointer p-2" id={product.id}>
-              <Link to={`/detailedProduct/${product.id}`} className='text-decoration-none'>
-                <img src={product.imageCover} alt="" className='w-100' />
-                <h3 className='font-sm text-main m-0'>{product.category.name}</h3>
-                <h3 className='h5 text-black'>{product.slug.split("-").splice(0, 3).join(" ")}</h3>
-                <div className='d-flex px-2 justify-content-between align-items-center py-2'>
-                  <span className='text-black'>{product.price} EGP</span>
-                  <div>
-                    <i class="fa-solid fa-star px-1 rating-color"></i>
-                    <span className='text-black'>{product.ratingsAverage}</span>
-                  </div>
-                </div>
-              </Link>
-              <div className='text-end'>
-                <Link><i className="fa-solid fa-heart text-danger fs-2 wishlistIcon"></i></Link>
-                <Link onClick={() => { PostDataToWishlist(product.id) }}><i className="fa-regular fa-heart text-danger fs-2 wishlistIcon"></i></Link>
-              </div>
-              <button onClick={() => { PostDataToCart(product.id) }} className='btn bg-main w-100'>Add to cart</button>
-            </div>
-          </div>)}
-      </div>
-    </div>}
+    <Products/>
   </>
 }

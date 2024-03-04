@@ -54,12 +54,6 @@ let wishlistSlice = createSlice({
         builder.addCase(addWishlistItem.fulfilled, (state , action) => {
             state.items = action.payload
         })
-        builder.addCase(removeWishlistItem.pending , (state)=>{
-            state.isLoading = true
-        })
-        builder.addCase(removeWishlistItem.fulfilled, (state , action) => {
-            state.isLoading = false
-        })
     }
 })
 
