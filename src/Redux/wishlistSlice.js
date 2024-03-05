@@ -5,6 +5,7 @@ let initialState = {
     items: [],
     isLoading: true,
     isError: null,
+    isAdded: false
 }
 
 export let getWishlist = createAsyncThunk("wishlistSlice/getWishlist",
@@ -53,6 +54,7 @@ let wishlistSlice = createSlice({
         })
         builder.addCase(addWishlistItem.fulfilled, (state , action) => {
             state.items = action.payload
+            state.isAdded = true
         })
     }
 })

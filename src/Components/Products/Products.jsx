@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { CartContext } from '../../Context/CartContext.js'
 import toast from 'react-hot-toast'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addWishlistItem } from '../../Redux/wishlistSlice.js'
 import styles from './Products.css'
 import { useContext } from 'react'
 export default function Products() {
-
+  let wishData = useSelector(({wishlist})=> wishlist)
+  console.log(wishData);
   let dispatch = useDispatch()
   function PostDataToWishlist(id) {
     dispatch(addWishlistItem(id)).then(data => {
@@ -66,8 +67,7 @@ export default function Products() {
                 </div>
               </Link>
               <div className='text-end'>
-                <Link><i className="fa-solid fa-heart text-danger fs-2 wishlistIcon"></i></Link>
-                <Link onClick={() => { PostDataToWishlist(product.id) }}><i className="fa-regular fa-heart text-danger fs-2 wishlistIcon"></i></Link>
+                <Link onClick={() => { PostDataToWishlist(product.id) }}><i className="fa-solid fa-heart text-danger fs-2 wishlistIcon"></i></Link>
               </div>
               <button onClick={() => { PostDataToCart(product.id) }} className='btn bg-main w-100'>Add to cart</button>
             </div>
