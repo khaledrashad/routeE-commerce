@@ -88,8 +88,7 @@ export default function DetailedProducts(props) {
             </div>
           </div>
           <div className='text-end'>
-            <Link><i className="fa-solid fa-heart text-danger fs-2 wishlistIcon"></i></Link>
-            <Link onClick={() => { PostDataToWishlist(id) }}><i className="fa-regular fa-heart text-danger fs-2 wishlistIcon"></i></Link>
+            <Link onClick={() => { PostDataToWishlist(id) }}><i className="fa-solid fa-heart text-danger fs-2 wishlistIcon"></i></Link>
           </div>
           <button onClick={() => { postItemToCart(id) }} className='btn bg-main w-100 text-white'>Add to cart</button>
 
