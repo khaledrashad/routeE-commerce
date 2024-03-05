@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/routeE-commerce/static/css/main.f991cd07.css",
-    "main.js": "/routeE-commerce/static/js/main.d847ff7a.js",
+    "main.js": "/routeE-commerce/static/js/main.c5d7001f.js",
     "static/js/592.7ae711f1.chunk.js": "/routeE-commerce/static/js/592.7ae711f1.chunk.js",
     "static/media/fa-solid-900.ttf": "/routeE-commerce/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/slider-image-1.jpeg": "/routeE-commerce/static/media/slider-image-1.3c3940ee0f1c3b17ff9a.jpeg",
@@ -24,11 +24,11 @@
     "static/media/slick.woff": "/routeE-commerce/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/routeE-commerce/index.html",
     "main.f991cd07.css.map": "/routeE-commerce/static/css/main.f991cd07.css.map",
-    "main.d847ff7a.js.map": "/routeE-commerce/static/js/main.d847ff7a.js.map",
+    "main.c5d7001f.js.map": "/routeE-commerce/static/js/main.c5d7001f.js.map",
     "592.7ae711f1.chunk.js.map": "/routeE-commerce/static/js/592.7ae711f1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f991cd07.css",
-    "static/js/main.d847ff7a.js"
+    "static/js/main.c5d7001f.js"
   ]
 }
