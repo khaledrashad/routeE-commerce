@@ -12,7 +12,7 @@ export default function Navbar() {
   function logOut() {
     localStorage.removeItem("token")
     setToken(false)
-    navigate("/login")
+    navigate("/routeE-commerce")
   }
 
   useEffect(()=>{
