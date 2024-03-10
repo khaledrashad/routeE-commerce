@@ -6,7 +6,6 @@ import { CartContext } from '../../Context/CartContext.js'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { addWishlistItem } from '../../Redux/wishlistSlice.js'
-import styles from './Products.css'
 import { useContext } from 'react'
 export default function Products() {
   let wishData = useSelector(({wishlist})=> wishlist)
